@@ -394,7 +394,7 @@ func main() {
 		                        if testnet == true {
 		                            address = keys.Hash160ToAddress(script, []byte{0x6f}) // (m/n)address - testnet addresses have a special prefix
 		                        } else {
-                                        address = keys.Hash160ToAddress(script, []byte{0x00}) // 1address
+                                        address = keys.Hash160ToAddress(script, []byte{0x30}) // 1address
   
 		                        }
 		                    }
