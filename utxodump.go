@@ -18,6 +18,23 @@ import "encoding/hex" // convert byte slice to hexadecimal
 import "strings"      // parsing flags from command line
 import "runtime"      // Check OS type for file-handler limitations
 
+func getPrefix(networkType string, testnet bool) string{
+    prefix := map[string]string{
+        "ltc": "ltc",
+        "btc": "bc",
+    }
+    test_prefix := map[string]string{
+        "ltc": "tltc",
+        "btc": "tb",
+    }
+    if testnet == true {
+        return test_prefix[networkType]
+    } else {
+        return prefix[networkType]
+    }
+
+}
+
 func main() {
 
     // Version
@@ -34,6 +51,7 @@ func main() {
     testnetflag := flag.Bool("testnet", false, "Is the chainstate leveldb for testnet?") // true/false
     verbose := flag.Bool("v", false, "Print utxos as we process them (will be about 3 times slower with this though).")
     version := flag.Bool("version", false, "Print version.")
+    network := flag.String("network", "btc", "btc/ltc") // the network we work on
     p2pkaddresses := flag.Bool("p2pkaddresses", false, "Convert public keys in P2PK locking scripts to addresses also.") // true/false
     nowarnings := flag.Bool("nowarnings", false, "Ignore warnings if bitcoind is running in the background.") // true/false
     quiet := flag.Bool("quiet", false, "Do not display any progress or results.") // true/false
@@ -376,7 +394,11 @@ func main() {
 		                        if testnet == true {
 		                            address = keys.Hash160ToAddress(script, []byte{0x6f}) // (m/n)address - testnet addresses have a special prefix
 		                        } else {
-		                            address = keys.Hash160ToAddress(script, []byte{0x00}) // 1address
+                                    if *network == "ltc"{
+                                        address = keys.Hash160ToAddress(script, []byte{0x30}) // 1address
+                                    } else {
+                                        address = keys.Hash160ToAddress(script, []byte{0x00}) // 1address
+                                    }
 		                        }
 		                    }
 		                    scriptType = "p2pkh"
@@ -451,9 +473,9 @@ func main() {
 
 		                    if fieldsSelected["address"] { // only work out addresses if they're wanted
 		                        if testnet == true {
-		                            address, _ = bech32.SegwitAddrEncode("tb", int(version), programint) // hrp (string), version (int), program ([]int)
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
 		                        } else {
-		                            address, _ = bech32.SegwitAddrEncode("bc", int(version), programint) // hrp (string), version (int), program ([]int)
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
 		                        }
 		                    }
 
@@ -473,9 +495,9 @@ func main() {
 
 		                    if fieldsSelected["address"] { // only work out addresses if they're wanted
 		                        if testnet == true {
-		                            address, _ = bech32.SegwitAddrEncode("tb", int(version), programint) // testnet bech32 addresses start with tb
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // testnet bech32 addresses start with tb
 		                        } else {
-		                            address, _ = bech32.SegwitAddrEncode("bc", int(version), programint) // mainnet bech32 addresses start with bc
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // mainnet bech32 addresses start with bc
 		                        }
 		                    }
 
@@ -495,9 +517,9 @@ func main() {
 
 		                    if fieldsSelected["address"] { // only work out addresses if they're wanted
 		                        if testnet == true {
-		                            address, _ = bech32.SegwitAddrEncode("tb", version, programint) // testnet bech32 addresses start with tb
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), version, programint) // testnet bech32 addresses start with tb
 		                        } else {
-		                            address, _ = bech32.SegwitAddrEncode("bc", version, programint) // mainnet bech32 addresses start with bc
+		                            address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), version, programint) // mainnet bech32 addresses start with bc
 		                        }
 		                    }
 
