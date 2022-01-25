@@ -394,11 +394,8 @@ func main() {
 		                        if testnet == true {
 		                            address = keys.Hash160ToAddress(script, []byte{0x6f}) // (m/n)address - testnet addresses have a special prefix
 		                        } else {
-                                    if *network == "ltc"{
-                                        address = keys.Hash160ToAddress(script, []byte{0x30}) // 1address
-                                    } else {
                                         address = keys.Hash160ToAddress(script, []byte{0x00}) // 1address
-                                    }
+  
 		                        }
 		                    }
 		                    scriptType = "p2pkh"
