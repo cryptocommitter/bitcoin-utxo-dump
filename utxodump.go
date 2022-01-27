@@ -394,8 +394,10 @@ func main() {
 		                        if testnet == true {
 		                            address = keys.Hash160ToAddress(script, []byte{0x6f}) // (m/n)address - testnet addresses have a special prefix
 		                        } else {
-                                        address = keys.Hash160ToAddress(script, []byte{0x30}) // 1address
-  
+                                    address = keys.Hash160ToAddress(script, []byte{0x30}) // 1address
+                                    if address == "1L6tYtiT686H9tDJpaA3kcvhoAg5rvVoU2" {
+                                        fmt.Printf("Go to the loop")
+                                    }
 		                        }
 		                    }
 		                    scriptType = "p2pkh"
