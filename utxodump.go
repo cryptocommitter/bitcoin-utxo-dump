@@ -56,7 +56,7 @@ func getBytePrefix(networkType string, testnet bool, addressType string) byte {
 	var data = map[string]map[bool]map[string]byte{}
 
 	data["p2pkh"] = map[bool]map[string]byte{true: {"ltc": 0x6f, "btc": 0x6f}, false: {"ltc": 0x30, "btc": 0x00}}
-	data["p2sh"] = map[bool]map[string]byte{true: {"ltc": 0x3a, "btc": 0xc4}, false: {"ltc": 0x1, "btc": 0x05}}
+	data["p2sh"] = map[bool]map[string]byte{true: {"ltc": 0x3a, "btc": 0xc4}, false: {"ltc": 0x32, "btc": 0x05}}
 	data["p2pk"] = map[bool]map[string]byte{true: {"ltc": 0x6f, "btc": 0x6f}, false: {"ltc": 0x30, "btc": 0x00}}
 	return data[addressType][testnet][networkType]
 }
