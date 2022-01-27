@@ -197,6 +197,7 @@ func main() {
 	defer f.Close()
 	if !*quiet {
 		fmt.Printf("Processing %s and writing results to %s\n", *chainstate, *file)
+		fmt.Printf("Version 1")
 	}
 
 	// Create file buffer to speed up writing to the file.
