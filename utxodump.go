@@ -102,6 +102,8 @@ func main() {
 			}
 		}
 	}
+	fmt.Printf("Version 1")
+
 
 	// Check if OS type is Mac OS, then increase ulimit -n to 4096 filehandler during runtime and reset to 1024 at the end
 	// Mac OS standard is 1024
