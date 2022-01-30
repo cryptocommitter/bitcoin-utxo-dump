@@ -571,12 +571,22 @@ func main() {
 			output["count"] = fmt.Sprintf("%d", i+1) // convert integer to string (e.g 1 to "1")
 			csvline := ""                            // Build output line from given fields
 			// [ ] string builder faster?
+			if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+				fmt.Println("WTF")
+				fmt.Println("map:", output)
+			}
 			for _, v := range strings.Split(*fields, ",") {
+				if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+					fmt.Println("Entered")
+				}
 				csvline += output[v]
 				csvline += ","
 			}
+			if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+				fmt.Println("Csv line %s", csvline)
+			}
 			csvline = csvline[:len(csvline)-1] // remove trailing ,
-
+			
 			// Print Results
 			// -------------
 			if !*quiet {
