@@ -610,6 +610,11 @@ func main() {
 				fmt.Println("Writing", csvline)
 			}
 			fmt.Fprintln(writer, csvline)
+			if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+				fmt.Println("Flushing!")
+				writer.Flush()
+				fmt.Println("Flushed")
+			}
 
 			// Increment Count
 			i++
