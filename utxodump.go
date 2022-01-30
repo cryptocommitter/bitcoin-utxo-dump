@@ -486,11 +486,15 @@ func main() {
 							if testnet == true {
 								address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
 							} else {
-								fmt.Printf("*** Got the following: %s, %t, %d, %v \n", *network, testnet, version, programint)
 								if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
 									fmt.Printf("Got to weird shit")
+									fmt.Printf("*** Got the following: %s, %t, %d, %v \n", *network, testnet, version, programint)
+
 								}
-								address, _ = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
+								address, err = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
+								if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+									fmt.Println(err)
+								}
 							}
 						}
 
