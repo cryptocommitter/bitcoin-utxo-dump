@@ -606,6 +606,9 @@ func main() {
 			// Write to File
 			// -------------
 			// Write to buffer (use bufio for faster writes)
+			if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
+				fmt.Println("Writing", csvline)
+			}
 			fmt.Fprintln(writer, csvline)
 
 			// Increment Count
