@@ -493,7 +493,7 @@ func main() {
 								}
 								address, err = bech32.SegwitAddrEncode(getPrefix(*network, testnet), int(version), programint) // hrp (string), version (int), program ([]int)
 								if output["txid"] == "371310d9f4e015d8fa1d22bc468fea6a99abcf889d695d9793cc896b069bb4d3" {
-									fmt.Println(err)
+									fmt.Println("%s", address)
 								}
 							}
 						}
