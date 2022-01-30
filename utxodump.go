@@ -1,5 +1,5 @@
 package main
-
+//
 // local packages
 import (
 	"bufio"
