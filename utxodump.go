@@ -194,6 +194,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer f.Sync()
 	defer f.Close()
 	if !*quiet {
 		fmt.Printf("Processing %s and writing results to %s\n", *chainstate, *file)
