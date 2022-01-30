@@ -636,6 +636,9 @@ func main() {
 				fmt.Printf(" %-12s %d\n", k, v) // %-12s = left-justify padding
 			}
 		}
+		fmt.Println("Flushing!")
+		writer.Flush()
+		fmt.Println("Flushed")
 	}
 
 }
